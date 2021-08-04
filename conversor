@@ -1,0 +1,14 @@
+from dbfread import DBF
+import glob
+import pandas as pd
+
+
+lista_archivos = glob.glob("*.DBF")
+print(lista_archivos)
+for i in lista_archivos:
+	filename = i.replace('.DBF','')
+	print(filename)
+	archivo=DBF(i, load=True, encoding = 'latin-1')
+	df = pd.DataFrame(iter(archivo))
+	df.to_excel(filename + ".xlsx", index= False)  
+	print(df)
